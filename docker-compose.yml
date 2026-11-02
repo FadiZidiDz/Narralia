@@ -1,0 +1,61 @@
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: narralia_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - narralia_net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  backend:
+    build: ./backend
+    container_name: narralia_backend
+    ports:
+      - "5000:5000"
+    env_file: .env
+    volumes:
+      - ./backend/storage:/app/storage
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - narralia_net
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: narralia_frontend
+    ports:
+      - "${FRONTEND_PORT:-3000}:80"
+    depends_on:
+      - backend
+    networks:
+      - narralia_net
+    restart: unless-stopped
+
+  languagetool:
+    image: silviof/docker-languagetool:latest
+    container_name: narralia_languagetool
+    ports:
+      - "8010:8010"
+    environment:
+      - Java_Xmx=512m
+    networks:
+      - narralia_net
+    restart: unless-stopped
+
+volumes:
+  mongo_data:
+
+networks:
+  narralia_net:
+    driver: bridge

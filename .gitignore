@@ -1,0 +1,7 @@
+.env
+.env.local
+.env.*.local
+node_modules/
+backend/storage/illustrations/*.png
+skills/
+children-stories-main/
