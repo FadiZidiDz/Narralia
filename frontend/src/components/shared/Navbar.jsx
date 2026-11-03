@@ -13,7 +13,7 @@ export default function Navbar() {
   return (
     <nav className="bg-slate-900 border-b border-slate-700 px-6 py-4 flex items-center justify-between">
       <Link to={isTeacher ? '/teacher/dashboard' : '/dashboard'} className="flex items-center gap-2">
-        <span className="text-2xl">🚀</span>
+        <img src="/narralia-logo.jpg" alt="Narralia" className="h-11 w-11 rounded-full object-cover shadow-md ring-2 ring-purple-400/40" />
         <span className="font-black text-xl text-white tracking-tight">Nar<span className="text-purple-400">ralia</span></span>
       </Link>
 

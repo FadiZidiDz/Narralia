@@ -32,9 +32,7 @@ export default function Login() {
 
       <div className="w-full max-w-md fade-in">
         <div className="text-center mb-8">
-          <span className="text-6xl">🚀</span>
-          <h1 className="text-4xl font-black text-white mt-3">Nar<span className="text-purple-400">ralia</span></h1>
-          <p className="text-slate-400 mt-2">Your story learning adventure awaits</p>
+          <img src="/narralia-logo.jpg" alt="Narralia" className="mx-auto h-44 w-44 rounded-full object-cover shadow-glow ring-4 ring-purple-400/30" />
         </div>
 
         <div className="bg-slate-800/80 backdrop-blur rounded-2xl p-8 shadow-glow border border-slate-700">
